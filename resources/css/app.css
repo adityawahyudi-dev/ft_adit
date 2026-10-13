@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+  --color-warm-ivory: #F1F0E8;
+  --color-charcoal: #20211F;
+  --color-sage-gray: #B9BBB0;
+  --color-muted-beige: #C6A77B;
+  --color-surface-border: #E2E0D5;
+  --color-surface-muted: #E8E7DD;
+  --color-charcoal-muted: #52544F;
+  --color-beige-subtle: #F6F0E6;
+
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-headline: 'Barlow Condensed', sans-serif;
+  --font-serif: 'Newsreader', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f0e8;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5c7c1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #757873;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1c1d1a;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #3f423b;
+}
+
+/* Ambient & Architectural Animations */
+@keyframes ambient-float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-7px) scale(1.012); }
+}
+
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
+
+@keyframes radar-ripple {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes auraGlow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.08); }
+}
+
+.animate-arch-breathe {
+  animation: ambient-float 6.5s ease-in-out infinite;
+}
+
+.animate-aura {
+  animation: auraGlow 8s ease-in-out infinite;
+}
+
+.radar-ring {
+  animation: radar-ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.shimmer-sweep-effect {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-sweep-effect::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  transform: translateX(-150%);
+  animation: shimmer-sweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.hover-tilt-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform;
+}
+.hover-tilt-card:hover {
+  transform: translateY(-5px);
+}
+
+.interactive-mesh-bg {
+  background-image: 
+    radial-gradient(circle at 18% 22%, rgba(226, 193, 148, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 82% 40%, rgba(185, 187, 176, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(246, 240, 230, 0.6) 0%, transparent 60%);
+}
+
+.dark .interactive-mesh-bg {
+  background-image: 
+    radial-gradient(circle at 18% 22%, rgba(115, 90, 53, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 82% 40%, rgba(69, 72, 67, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(27, 28, 23, 0.8) 0%, transparent 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
